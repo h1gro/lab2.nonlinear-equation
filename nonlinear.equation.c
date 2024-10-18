@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <main.h>
 #include <nonlinear.equation.h>
 
 double nonlinear_equation(double *radioactivity, double *time, int N, double precision)
 {
-    double interval1 = 0, interval2 = 0, decay_time = 0;
+    double interval1 = 0, interval2 = 0, decay_time = 0, decay_time0 = 0;
     int i = 0;
     scanf("%lg%lg", &interval1, &interval2);
 
@@ -27,9 +28,16 @@ double nonlinear_equation(double *radioactivity, double *time, int N, double pre
         }
         else
         {
-            return decay_time;
+            decay_time0 = decay_time;
         }
     }
+
+    if (IsEqual(decay_time0, 0))
+    {
+        printf("\n<<<The root of nonlinear equation was not found!>>>\n");
+    }
+
+    return decay_time0;
 }
 
 bool IsEqual(double elem1, double elem2, double precision)
